@@ -1,0 +1,38 @@
+<main class="container text-light col-mid-6 container-fluid" style="min-height: 90vh;display:flex;flex-direction: column; justify-content: left;">
+        <div class="row ">
+          <div class=" d-flex p-4 justify-content-center ">
+            <h2><u>{{title}}</u></h2>
+          </div>
+        </div>
+        <div class="input-group " >
+          <div class=" container-fluid pb-3 col-md-6 "  >
+            <span id="incorrectMessage" style="color: red;">{{incorrect}}</span>
+            <form id="form" method="post" action="{{formaciton}}" class=" container-fluid" >
+              <div class="row">
+  
+               <div class="col-md-12 my-1">
+                 <div class="form-group">
+                   <label for="exampleInputEmail1">Email address</label>
+                   <input required type="email" class="form-control" name="username"  id="exampleInputEmail1"  placeholder="Full Name"   >
+                 </div>
+               </div>
+  
+               <div class="col-md-12 my-1">
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Password</label>
+                  <input required type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="Password">
+                </div>
+               </div>
+               <div class="col-md-12 text-center my-2 pt-2">
+                 <div class="col-md-12 text-center  ">
+                    <input   type="submit"  value="LOGIN" class=" bg-info  form-control" style="box-shadow: 0 .5rem .5rem rgb(0,0,0 ,0.9);" >             
+                 </div>
+                </div>
+                </div>
+            </form>
+            <p>{{newuser}} <a href="http://localhost:3000/signup">{{btnaciton}}</a> {{nextLoginmsg}} <a href="{{nextLogin}}">click here</a></p>
+          </div>
+           
+      </main>
+      <script src="/javascripts/passwordCheck.js"></script>
+    
