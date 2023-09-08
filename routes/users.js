@@ -3,7 +3,7 @@ var router = express.Router();
 
 //importing connecitingToMongo
 let {dB1} = require('./connectingToMongo');
-//declaring variable to make it avilable globally
+//declaring variable to make it avilable globeally
 let uppercaseName1, uppercaseName2;
 
 //function to check the session 

@@ -19,7 +19,7 @@ function dB1(){
     return connectingToDb('userDataBase') //userDataBase is the name of the prefered database
 }
 function dB2(){
-    connectingToDb('anyDataBase')     //anyDatabase is the name of the prefered database
+    connectingToDb('adminDataBase')     //anyDatabase is the name of the prefered database
 }
 
 

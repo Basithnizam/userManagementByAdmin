@@ -3,53 +3,53 @@
 <main class="container text-light col-mid-6 container-fluid" style="min-height: 90vh;display:flex;flex-direction: column; justify-content: left;">
         <div class="row ">
           <div class=" d-flex p-4 justify-content-center ">
-            <h2><u>{{title}}</u></h2>
+            <h2>{{title}}</h2>
           </div>
         </div>
         <div class="input-group " >
           <div class=" container-fluid pb-3 col-md-6 "  >
             <span id="incorrectMessage" style="color: red;">{{incorrect}}</span><br>
-             <p style="padding-left: .8rem;"> already have an account? <a  href="http://localhost:3000/" >LOGIN</a></p>
+            
 
-            <form id="form" method="post" action="/signup" class=" container-fluid" >
+            <form id="form" method="post" action="/admin/updateuser/{{user._id}}" class=" container-fluid" >
 
               <div class="row">
   
                <div class="col-md-12 my-1">
                  <div class="form-group">
                    <label for="firstname">First Name</label>
-                   <input required type="text" class="form-control" name="firstname"  id="firstname"  placeholder="First Name"   >
+                   <input required type="text" class="form-control" name="firstname"  id="firstname" value="{{user.firstname}}" placeholder="First Name"   >
                  </div>
                </div>
                <div class="col-md-12 my-1">
                  <div class="form-group">
                    <label for="exampleInputEmail1">Last Name</label>
-                   <input required type="text" class="form-control" name="lastname"  id="lastname"  placeholder="Last Name"   >
+                   <input required type="text" class="form-control" name="lastname"  id="lastname" value="{{user.lastname}}"  placeholder="Last Name"   >
                  </div>
                </div>
                <div class="col-md-12 my-1">
                  <div class="form-group">
                    <label for="exampleInputEmail1">Email address</label>
-                   <input required type="email" class="form-control" name="username"  id="exampleInputEmail1"  placeholder="E-mail"   >
+                   <input required type="email" class="form-control" name="username"  id="exampleInputEmail1" value="{{user.username}}" placeholder="E-mail"   >
                  </div>
                </div>
   
                <div class="col-md-12 my-1">
                 <div class="form-group">
                   <label for="first-password">Password</label>
-                  <input required type="password" class="form-control"  id="first-password" placeholder="Password">
+                  <input required type="text" class="form-control"  id="first-password" value="{{user.password}}" placeholder="Password">
                 </div>
                </div>
                <div class="col-md-12 my-1">
                 <div class="form-group">
                   <label for="confirm_password">Confirm Password</label>
-                  <input required type="password" onblur="validatepassword()" class="form-control"  id="confirm_password" name="password"  placeholder="Confirm Password" >
+                  <input type="text" onblur="validatepassword()" class="form-control"  id="confirm_password" name="password" value="{{user.password}}" placeholder="Confirm Password" required>
                   <span id="passwordMismatch" style="color: red;"></span>
                 </div>
                </div>
                <div class="col-md-12 text-center my-2 pt-2">
                  <div class="col-md-12 text-center  ">
-                  <input onclick="return validatepassword()"  type="submit"  value="{{title}}" class=" bg-info  form-control" style="box-shadow: 0 .5rem .5rem rgb(0,0,0 ,0.9);" >
+                  <input onclick="return validatepassword()"  type="submit"  value="submit" class=" bg-info  form-control" style="box-shadow: 0 .5rem .5rem rgb(0,0,0 ,0.9);" >
                  </div>
                 </div>
               </div>
@@ -57,8 +57,13 @@
             </form>
            
           </div>
+          
            
       </main>
+      <div class="d-flex p-4 justify-content-between">
+    <a href="/admin"><button type="button" class="btn btn-primary btn-lg btn-block m-2 w-90%">HOME</button></a>
+    <a href="/logout"><button type="button" class="btn btn-primary btn-lg btn-block m-2 w-90%">LogOut</button></a>
+</div>
 
       <script src="/javascripts/passwordCheck.js"></script>
 

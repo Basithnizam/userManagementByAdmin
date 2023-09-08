@@ -50,15 +50,6 @@ router.get('/logout', (req, res) => {
 
 
 
-
-
-
-
-
-
-
-
-
 //SignUp page
 router.get('/signup',(req, res)=>{
   res.render('signup', {title:'SignUp', action:'Signup page' })
