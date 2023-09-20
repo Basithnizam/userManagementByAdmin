@@ -29,7 +29,7 @@ router.post('/updateUser/:id', isAdmin, async (req, res) => {
         const existingUser = await collection.findOne({ username: updatedUserData.username });
 
         if (existingUser && existingUser._id.toString() !== userId) {
-            // Username already exists for another user
+            // There is already a 0000000000000 User with same username
             return res.status(400).send('Username is already taken');
         } else {
 
@@ -40,7 +40,7 @@ router.post('/updateUser/:id', isAdmin, async (req, res) => {
 
     } catch (error) {
         console.error('Error in updating user:', error);
-        res.status(500).send('Internal Server Error');
+        res.status(500).send('Internal Server Error')
     }
 });
 
@@ -181,7 +181,7 @@ router.post('/search', isAdmin, async (req, res) => {
 router.get('/findusers', isAdmin, async (req, res) => {
     try {
         const db = await dB1();
-        const collection = db.collection('users');
+        const collection =await db.collection('users');
 
         // Fetch all user documents from the database
         const users = await collection.find({}).toArray();
@@ -189,14 +189,13 @@ router.get('/findusers', isAdmin, async (req, res) => {
         res.render('adminFindUser', { title: `ADMIN Dashbord`, action: 'Find user', welcome: `USER LIST`, button: 'LogOut', users });
 
 
-        // Render the Admin Users view and pass the user data
-        res.render('/users', { title: 'User List', users });
+        
     } catch (error) {
         console.error('Error:', error);
         res.status(500).send('Internal  Server Error');
     }
 });
-
+   
 //Admin login authentication and assign session 
 router.post('/', async (req, res) => {
     try {
