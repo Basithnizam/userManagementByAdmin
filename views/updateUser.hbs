@@ -34,19 +34,19 @@
                  </div>
                </div>
   
-               <div class="col-md-12 my-1">
+               {{!-- <div class="col-md-12 my-1">
                 <div class="form-group">
                   <label for="first-password">Password</label>
-                  <input required type="text" class="form-control"  id="first-password" value="{{user.password}}" placeholder="Password">
+                  <input  type="text" class="form-control"  id="first-password"  placeholder="Password">
                 </div>
                </div>
                <div class="col-md-12 my-1">
                 <div class="form-group">
                   <label for="confirm_password">Confirm Password</label>
-                  <input type="text" onblur="validatepassword()" class="form-control"  id="confirm_password" name="password" value="{{user.password}}" placeholder="Confirm Password" required>
+                  <input type="text" onblur="validatepassword()" class="form-control"  id="confirm_password" name="password"  placeholder="Confirm Password" >
                   <span id="passwordMismatch" style="color: red;"></span>
                 </div>
-               </div>
+               </div> --}}
                <div class="col-md-12 text-center my-2 pt-2">
                  <div class="col-md-12 text-center  ">
                   <input onclick="return validatepassword()"  type="submit"  value="submit" class=" bg-info  form-control" style="box-shadow: 0 .5rem .5rem rgb(0,0,0 ,0.9);" >

@@ -3,6 +3,9 @@ var router = express.Router();
 let { dB1 } = require('./connectingToMongo');
 const { ObjectId } = require('mongodb'); // Import ObjectId from MongoDB for using Object id
 
+const bcrypt = require('bcrypt');
+
+
 
 let uppercaseName1
 
@@ -130,25 +133,35 @@ router.get('/adduser', isAdmin, (req, res) => {
 //Posting the user adding form 
 router.post('/adduser', isAdmin, async (req, res) => {
     try {
-        let db = await dB1();
-        let connection = await db.collection('users');
-
-        // Check if the username already exists in the database
-        const existingUser = await connection.findOne({ username: req.body.username });
-
-        if (existingUser) {
-            // Username already exists, return an error message or redirect to signup page
-            res.render('addUser', { title: 'Add User', action: 'Adding user', incorrect: 'This email is already resgisterd', formaction: '/adduser' })
-        } else {
-            // Username doesn't exist, proceed with insertion
-            await connection.insertOne(req.body);
-            res.redirect('/admin')
-        }
+      let db = await dB1();
+      let connection = await db.collection('users');
+  
+      // Check if the username already exists in the database
+      const existingUser = await connection.findOne({ username: req.body.username });
+  
+      if (existingUser) {
+        // Username already exists, return an error message
+        res.render('addUser', { title: 'Add User', action: 'Adding user', incorrect: 'This email is already registered', formaction: '/adduser' });
+      } else {
+        // Username doesn't exist, proceed with password hashing and insertion
+        const saltRounds = 10; // Number of salt rounds (higher is more secure)
+        const hashedPassword = await bcrypt.hash(req.body.password, saltRounds);
+  
+        // Update the password field with the hashed password
+        req.body.password = hashedPassword;
+  
+        await connection.insertOne(req.body);
+        res.redirect('/admin');
+      }
     } catch (error) {
-        console.error('Error in /signup:', error);
-        res.status(500).send('Internal Server Error');
+      console.error('Error in /adduser:', error);
+      res.status(500).send('Internal Server Error');
     }
-})
+  });
+  
+
+
+
 
 
 //Query Search

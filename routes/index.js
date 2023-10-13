@@ -6,10 +6,16 @@ var router = express.Router();
 //importing mongodb connection function
 let {dB1} = require('./connectingToMongo')
 
+const bcrypt = require('bcrypt');
+const saltRounds = 10; // Number of salt rounds (higher is more secure)
+
+
 
 router.get('/',(req, res)=>{
   res.redirect('/users')
 });
+
+
 
 
 router.post('/signup', async (req, res) => {
@@ -22,11 +28,14 @@ router.post('/signup', async (req, res) => {
 
     if (existingUser) {
       // Username already exists, return an error message or redirect to signup page
-      res.render('signup', {title:'SignUp', action:'Signup page',incorrect:'This email is already resgisterd' })
+      res.render('signup', { title: 'SignUp', action: 'Signup page', incorrect: 'This email is already registered' });
     } else {
-      // Username doesn't exist, proceed with insertion
+      // Username doesn't exist, proceed with password hashing and insertion
+      const hashedPassword = await bcrypt.hash(req.body.password, saltRounds);
+      req.body.password = hashedPassword; // Update the password field with the hashed password
+
       await connection.insertOne(req.body);
-      res.render('home', { title: 'Successfully signed up', action: 'SignUp' ,button:'LogIn'});
+      res.render('home', { title: 'Successfully signed up', action: 'SignUp', button: 'LogIn' });
       console.log('Insertion worked');
     }
   } catch (error) {
@@ -34,6 +43,8 @@ router.post('/signup', async (req, res) => {
     res.status(500).send('Internal Server Error');
   }
 });
+
+
 
 router.get('/logout', (req, res) => {
   req.session.destroy((err) => {
@@ -52,7 +63,7 @@ router.get('/logout', (req, res) => {
 
 //SignUp page
 router.get('/signup',(req, res)=>{
-  res.render('signup', {title:'SignUp', action:'Signup page' })
+  res.render('signup', {title:'SignUp', action:'Signup page' }) 
 });
 
 
